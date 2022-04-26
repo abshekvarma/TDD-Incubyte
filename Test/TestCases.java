@@ -1,3 +1,6 @@
+package test;
+
+
 import org.junit.Before;
 import org.junit.Test;
 import static org.junit.Assert.*;
@@ -14,18 +17,33 @@ public class TestCases {
     }
 
     @Test
-    public void Test1SuccessWithTwoNumbers(){
+    public void Test1_SuccessWithTwoNumbers(){
         assertEquals(addition.sum("1,2"), 3);
     }
 
     @Test
-    public void Test1SuccessWithOneNumber(){
+    public void Test2_SuccessWithThreeNumbers(){
+        assertEquals(addition.sum("1,2,3"), 6);
+    }
+
+    @Test
+    public void Test3_SuccessWithOneNumber(){
         assertEquals(addition.sum("1"), 0);
     }
 
     @Test
-    public void Test2SuccessWithEmptyString(){
+    public void Test4_SuccessWithEmptyString(){
         assertEquals(addition.sum(""), 0);
+    }
+
+    @Test
+    public void Test5_SuccessWithMultipleDelim(){
+        assertEquals(addition.sum("1\n2,3"), 6);
+    }
+
+    @Test
+    public void Test6_SuccessWithMultipleDelim(){
+        assertEquals(addition.sum("1,\n"), 0);
     }
 
 }

@@ -3,7 +3,7 @@ package service;
 public class AdditionImpl implements IAddition {
     @Override
     public int sum(String numbers) {
-        String[] integers = numbers.split(",");
+        String[] integers = numbers.split("[,\\n]");
         int sum = 0;
         if (integers.length == 1) {
             return 0;
