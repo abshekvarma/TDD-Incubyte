@@ -82,4 +82,9 @@ public class TestCases {
         assertEquals(addition.sum("//[***]\n1***2***3"), 6);
     }
 
+    @Test
+    public void Test13_SuccessMultipleDelim(){
+        assertEquals(addition.sum("//[*][%]\n1*2%3"), 6);
+    }
+
 }
