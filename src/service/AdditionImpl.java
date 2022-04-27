@@ -8,7 +8,7 @@ import java.util.List;
 public class AdditionImpl implements IAddition {
     @Override
     public int sum(String numbers) {
-        String[] integers = numbers.split("[//]*[,;\n]");
+        String[] integers = numbers.split("[//]*[,+;\n]");
         List<Integer> negativeNums = new ArrayList<>();
         int sum = 0;
         if (integers.length == 1) {
@@ -20,6 +20,8 @@ public class AdditionImpl implements IAddition {
                 if(val<0){
                     negativeNums.add(val);
                     throw new NegativeNumberException("negatives not allowed");
+                }if(val>1000){
+                    continue;
                 }
                 sum+=val;
             }catch(NegativeNumberException e){
