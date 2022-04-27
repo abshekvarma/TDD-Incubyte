@@ -77,4 +77,9 @@ public class TestCases {
         assertEquals(addition.sum("2+1001"), 2);
     }
 
+    @Test
+    public void Test12_SuccessAnyLengthDelim(){
+        assertEquals(addition.sum("//[***]\n1***2***3"), 6);
+    }
+
 }

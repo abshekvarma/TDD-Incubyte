@@ -8,7 +8,7 @@ import java.util.List;
 public class AdditionImpl implements IAddition {
     @Override
     public int sum(String numbers) {
-        String[] integers = numbers.split("[//]*[,+;\n]");
+        String[] integers = numbers.split("[//]*[[***]]*[*,+;\n]");
         List<Integer> negativeNums = new ArrayList<>();
         int sum = 0;
         if (integers.length == 1) {
