@@ -87,4 +87,9 @@ public class TestCases {
         assert addition.Add("//[*][%]\n1*2%3") == 6;
     }
 
+    @Test
+    public void Test14_SuccessMultipleDelim() throws Exception {
+        assert addition.Add("//[*][%]\n1*2\n3") == 6;
+    }
+
 }

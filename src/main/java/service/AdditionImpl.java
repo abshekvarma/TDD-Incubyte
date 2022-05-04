@@ -8,7 +8,7 @@ import java.util.List;
 public class AdditionImpl implements IAddition {
     @Override
     public int Add(String numbers) throws NegativeNumberException {
-        String[] integers = numbers.split("[//]*[[***]]*[[*]]*[[,]]*[[%]]*[[+]]*[[;]]*[*,%+;\n]");
+        String[] integers = delimitersValidations(numbers);
         List<Integer> negativeNums = new ArrayList<>();
         int sum = 0;
         if (integers.length == 1) {
@@ -34,5 +34,22 @@ public class AdditionImpl implements IAddition {
                 continue;
             }
         return sum;
+    }
+
+    private String[] delimitersValidations(String numbers) {
+        if (numbers.startsWith("//")) {
+            String[] num = numbers.split("\n");
+            if (num.length > 2) {
+                StringBuilder numbersBuilder = new StringBuilder();
+                for (int i = 1; i < num.length; i++) {
+                    numbersBuilder.append(num[i]);
+                    numbersBuilder.append(";");
+                }
+                numbers = numbersBuilder.toString();
+            } else {
+                numbers = num[1];
+            }
+        }
+        return numbers.split("[*,%+;\\n]+");
     }
 }
