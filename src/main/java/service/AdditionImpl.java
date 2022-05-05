@@ -37,19 +37,21 @@ public class AdditionImpl implements IAddition {
     }
 
     private String[] delimitersValidations(String numbers) {
+        String delimeters = ",";
         if (numbers.startsWith("//")) {
             String[] num = numbers.split("\n");
+            delimeters = num[0];
             if (num.length > 2) {
                 StringBuilder numbersBuilder = new StringBuilder();
                 for (int i = 1; i < num.length; i++) {
                     numbersBuilder.append(num[i]);
-                    numbersBuilder.append(";");
+                    numbersBuilder.append(delimeters.charAt(1));
                 }
                 numbers = numbersBuilder.toString();
             } else {
                 numbers = num[1];
             }
         }
-        return numbers.split("[*,%+;\\n]+");
+        return numbers.split("["+delimeters+"\n]+");
     }
 }
