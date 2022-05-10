@@ -1,19 +1,22 @@
 package service;
 
+import exception.InvalidInputException;
 import exception.NegativeNumberException;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class AdditionImpl implements IAddition {
+
+    boolean flagMultiply = false;
     @Override
-    public int Add(String numbers) throws NegativeNumberException {
-        String[] integers = delimitersValidations(numbers);
-        List<Integer> negativeNums = new ArrayList<>();
-        int sum = 0;
-        if (integers.length == 1) {
+    public int Add(String numbers) throws Exception {
+        if(numbers.isEmpty()){
             return 0;
         }
+        String[] integers = delimitersValidations(numbers);
+        List<Integer> negativeNums = new ArrayList<>();
+        int sum = 0, multiply =1;
         for (int i = 0; i < integers.length; i++)
             try {
                 int val = Integer.parseInt(integers[i]);
@@ -24,19 +27,23 @@ public class AdditionImpl implements IAddition {
                 if (val > 1000) {
                     continue;
                 }
-                sum += val;
+                if(flagMultiply){
+                    multiply *= val;
+                }else{
+                    sum += val;
+                }
             } catch (NegativeNumberException e) {
-                sum = 0;
                 if (i + 1 == integers.length) {
                     throw new NegativeNumberException(e.getMessage() + ", Numbers are " + negativeNums);
                 }
-            } catch (NumberFormatException e) {
-                continue;
             }
+        if(flagMultiply){
+            return multiply;
+        }
         return sum;
     }
 
-    private String[] delimitersValidations(String numbers) {
+    private String[] delimitersValidations(String numbers) throws InvalidInputException {
         String delimeters = ",";
         if (numbers.startsWith("//")) {
             String[] num = numbers.split("\n");
@@ -51,6 +58,11 @@ public class AdditionImpl implements IAddition {
             } else {
                 numbers = num[1];
             }
+        }else if(numbers.endsWith("\n")){
+            throw new InvalidInputException("Invalid Input");
+        }
+        if(delimeters.contains("*")){
+            flagMultiply = true;
         }
         return numbers.split("["+delimeters+"\n]+");
     }
