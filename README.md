@@ -1,4 +1,4 @@
-# TDD-Incubyte
+# TDD-Kata
 
 **Problem Statement:**
 
